@@ -6,5 +6,6 @@ Business College Helsinki school assignment with React function components, Hook
 
 - React
 - Axios
+- https://pokeapi.co/
 
 ## Screenshots
