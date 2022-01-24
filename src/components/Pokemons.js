@@ -41,10 +41,11 @@ const Pokemons = () => {
   };
   return (
     <div>
-      <Container>
+      <Container fluid style={{ margin: "2vw", width: "96vw" }}>
         <Row
           xs={2}
-          md={5}
+          md={4}
+          lg={5}
           className="justify-content-between d-flex my-5 gap-5"
         >
           {isLoading && <Loader />}
