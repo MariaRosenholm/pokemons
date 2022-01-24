@@ -8,7 +8,7 @@ import React from "react";
 const Header = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
-      <Container fluid style={{ margin: "2vw", width: "98vw" }}>
+      <Container fluid style={{ margin: "2vw", width: "98vw", height: "2vh" }}>
         <Navbar.Brand href="/">PokeApp</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
