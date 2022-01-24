@@ -14,7 +14,7 @@ const Pokemons = () => {
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPokemons, setNextPokemons] = useState(
-    "https://pokeapi.co/api/v2/pokemon/"
+    "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
   );
 
   const getPokemons = () => {
@@ -56,9 +56,6 @@ const Pokemons = () => {
         </Row>
       </Container>
       <Container className="justify-content-between d-flex my-5 ">
-        {/* <Button style={{ background: "black" }} onClick={}>
-          Last page
-          </Button> */}
         <Button variant="primary" size="lg" onClick={getPokemons}>
           Load more...
         </Button>
