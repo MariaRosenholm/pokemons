@@ -10,3 +10,5 @@ Business College Helsinki school assignment with React function components, Hook
 - Bootstrap
 
 ## Screenshots
+
+Will be here!
