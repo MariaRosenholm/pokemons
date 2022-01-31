@@ -11,34 +11,36 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Pokemons = () => {
-  const [pokemons, setPokemons] = useState();
+  const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [offset, setOffset] = useState(0);
+  const [nextPokemons, setNextPokemons] = useState(
+    "https://pokeapi.co/api/v2/pokemon?limit=20&offset=0"
+  );
 
-  const API = "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=" + offset;
+  const getPokemons = () => {
+    axios
+      .get(nextPokemons)
+      .catch((error) => {
+        console.log(error);
+      })
+      .then((res) => {
+        const fethches = res.data.results.map((p) =>
+          axios.get(p.url).then((res) => res.data)
+        );
 
-  useEffect(() => {
-    axios.get(API).then((res) => {
-      const fethches = res.data.results.map((p) =>
-        axios.get(p.url).then((res) => res.data)
-      );
+        setNextPokemons(res.data.next);
 
-      Promise.all(fethches).then((data) => {
-        setPokemons(data);
+        Promise.all(fethches).then((data) => {
+          setPokemons((previousState) => [...previousState, ...data]);
+        });
         setIsLoading(false);
       });
-    });
-  }, [API]);
-
-  const showMorePokemons = () => {
-    setOffset(offset + 20);
   };
 
-  const showPreviousPokemons = () => {
-    if (offset !== 0) {
-      setOffset(offset - 20);
-    }
-  };
+  useEffect(() => {
+    getPokemons();
+  }, []);
+
   return (
     <div>
       <Container fluid style={{ margin: "2vw", width: "96vw" }}>
@@ -54,11 +56,8 @@ const Pokemons = () => {
         </Row>
       </Container>
       <Container className="justify-content-between d-flex my-5 ">
-        <Button style={{ background: "black" }} onClick={showPreviousPokemons}>
-          Last page
-        </Button>
-        <Button style={{ background: "black" }} onClick={showMorePokemons}>
-          Next page
+        <Button variant="primary" size="lg" onClick={getPokemons}>
+          Load more...
         </Button>
       </Container>
     </div>
