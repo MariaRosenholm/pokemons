@@ -19,6 +19,9 @@ const Header = () => {
             <LinkContainer to="pokemons">
               <Nav.Link href="pokemons">Pokemons</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="favorites">
+              <Nav.Link href="favorites">Favorites</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Container>

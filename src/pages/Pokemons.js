@@ -1,5 +1,5 @@
-import PokemonCard from "./PokemonCard";
-import Loader from "./Spinner";
+import PokemonCard from "../components/PokemonCard";
+import Loader from "../components/Spinner";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-const Pokemons = () => {
+const Pokemons = ({ favHandler, favorites }) => {
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPokemons, setNextPokemons] = useState(
@@ -43,6 +43,15 @@ const Pokemons = () => {
 
   return (
     <div>
+      <Container className="justify-content-center d-flex">
+        <input
+          style={{ width: "15vw", padding: "1vh" }}
+          type="text"
+          name="search"
+          placeholder="search by pokemon name"
+          // onChange={this.searchHandler}
+        />
+      </Container>
       <Container fluid style={{ margin: "2vw", width: "96vw" }}>
         <Row
           xs={2}
@@ -52,11 +61,18 @@ const Pokemons = () => {
         >
           {isLoading && <Loader />}
           {!isLoading &&
-            pokemons.map((p) => <PokemonCard pokemon={p} key={p.name} />)}
+            pokemons.map((p) => (
+              <PokemonCard
+                fav={favorites.some((item) => item.name == p.name)}
+                pokemon={p}
+                key={p.name}
+                favHandler={() => favHandler(p)}
+              />
+            ))}
         </Row>
       </Container>
-      <Container className="justify-content-between d-flex my-5 ">
-        <Button variant="primary" size="lg" onClick={getPokemons}>
+      <Container className="justify-content-center d-flex">
+        <Button variant="dark" size="lg" onClick={getPokemons}>
           Load more...
         </Button>
       </Container>
