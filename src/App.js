@@ -37,6 +37,7 @@ function App() {
       setFavorites(newArray);
     }
   };
+
   return (
     <div className="App">
       <BrowserRouter>

@@ -11,6 +11,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Pokemons = ({ favHandler, favorites }) => {
+  const [searchInput, setSearchInput] = useState("");
   const [pokemons, setPokemons] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [nextPokemons, setNextPokemons] = useState(
@@ -41,15 +42,22 @@ const Pokemons = ({ favHandler, favorites }) => {
     getPokemons();
   }, []);
 
+  const searchHandler = (e) => {
+    setSearchInput(e.target.value);
+  };
+
   return (
     <div>
-      <Container className="justify-content-center d-flex">
+      <Container
+        className="justify-content-left d-flex"
+        style={{ margin: "3vh" }}
+      >
         <input
           style={{ width: "15vw", padding: "1vh" }}
           type="text"
           name="search"
           placeholder="search by pokemon name"
-          // onChange={this.searchHandler}
+          onChange={searchHandler}
         />
       </Container>
       <Container fluid style={{ margin: "2vw", width: "96vw" }}>
@@ -61,14 +69,20 @@ const Pokemons = ({ favHandler, favorites }) => {
         >
           {isLoading && <Loader />}
           {!isLoading &&
-            pokemons.map((p) => (
-              <PokemonCard
-                fav={favorites.some((item) => item.name == p.name)}
-                pokemon={p}
-                key={p.name}
-                favHandler={() => favHandler(p)}
-              />
-            ))}
+            pokemons
+              .filter((pokemon) => {
+                return pokemon.name
+                  .toLowerCase()
+                  .includes(searchInput.toLowerCase());
+              })
+              .map((p) => (
+                <PokemonCard
+                  fav={favorites.some((item) => item.name == p.name)}
+                  pokemon={p}
+                  key={p.name}
+                  favHandler={() => favHandler(p)}
+                />
+              ))}
         </Row>
       </Container>
       <Container className="justify-content-center d-flex">
