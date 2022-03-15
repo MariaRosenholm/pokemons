@@ -13,7 +13,7 @@ Business College Helsinki school assignment with React function components with 
 ## Screenshots
 
 ![Screenshot of the application homepage](./screenshots/landingpage.png)
-![Screenshot of the application homepage](./screenshots/pokemons.png)
-![Screenshot of the application homepage](./screenshots/searchpokemons.png)
-![Screenshot of the application homepage](./screenshots/loadingpokemons.png)
-![Screenshot of the application homepage](./screenshots/favourites.png)
+![Screenshot of the application searchpage](./screenshots/pokemons.png)
+![Screenshot of the application searching](./screenshots/searchpokemons.png)
+![Screenshot of the application search page loading more](./screenshots/loadingpokemons.png)
+![Screenshot of the application favourites](./screenshots/favourites.png)
